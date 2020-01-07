@@ -6,7 +6,7 @@ Welcome to django-auth-adfs-db's documentation!
 :Keywords: ADFS, Django, database, authentication backend
 :PythonVersion: 3.7
 
-|build-status| |requirements| |coverage|
+|build-status| |coverage|
 
 |python-versions| |django-versions| |pypi-version|
 
@@ -122,10 +122,6 @@ Please follow the ``django-auth-adfs`` documentation for advanced usage.
 
 .. |build-status| image:: https://travis-ci.org/isprojects/django-auth-adfs-db.svg?branch=develop
     :target: https://travis-ci.org/isprojects/django-auth-adfs-db
-
-.. |requirements| image:: https://requires.io/github/isprojects/django-auth-adfs-db/requirements.svg?branch=develop
-    :target: https://requires.io/github/isprojects/django-auth-adfs-db/requirements/?branch=develop
-    :alt: Requirements status
 
 .. |coverage| image:: https://codecov.io/gh/isprojects/django-auth-adfs-db/branch/develop/graph/badge.svg
     :target: https://codecov.io/gh/isprojects/django-auth-adfs-db

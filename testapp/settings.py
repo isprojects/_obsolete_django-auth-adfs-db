@@ -6,8 +6,7 @@ SECRET_KEY = "so-secret-i-cant-believe-you-are-looking-at-this"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "django_auth_adfs_db.db"),
+        "ENGINE": "django.db.backends.postgresql",
     }
 }
 
@@ -16,6 +15,8 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.sessions",
     "django.contrib.admin",
+    "solo",
+    "django_auth_adfs",
     "django_auth_adfs_db",
     "testapp",
 ]
@@ -47,3 +48,8 @@ TEMPLATES = [
 ]
 
 ROOT_URLCONF = "testapp.urls"
+
+AUTH_ADFS = {"SETTINGS_CLASS": "django_auth_adfs_db.settings.Settings"}
+
+LOGIN_URL = "django_auth_adfs:login"
+LOGIN_REDIRECT_URL = "admin:index"
