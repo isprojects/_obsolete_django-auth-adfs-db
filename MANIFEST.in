@@ -1,0 +1,8 @@
+include *.rst
+include LICENSE
+recursive-include django_auth_adfs_db *.html
+recursive-include django_auth_adfs_db *.txt
+recursive-include django_auth_adfs_db *.po
+global-exclude __pycache__
+global-exclude *.py[co]
+
