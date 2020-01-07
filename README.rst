@@ -94,8 +94,9 @@ Finally, register the URLs in your root config with:
 ADFS login URL on admin login
 -----------------------------
 
+Template: ``admin/login.html``
+
 .. code-block:: django
-    :filename: templates/admin/login.html
 
     {% extends "admin/login.html" %}
     {% load solo_tags i18n %}
@@ -134,4 +135,4 @@ Please follow the ``django-auth-adfs`` documentation for advanced usage.
 .. |pypi-version| image:: https://img.shields.io/pypi/v/django-auth-adfs-db.svg
     :target: https://pypi.org/project/django-auth-adfs-db/
 
-.. _django-auth-adfs:: https://pypi.org/project/django-auth-adfs/
+.. _django-auth-adfs: https://pypi.org/project/django-auth-adfs/
