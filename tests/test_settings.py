@@ -1,8 +1,8 @@
 from django.core.cache import cache
 from django.test import TestCase
 
-from django_auth_adfs_db.settings import Settings
 from django_auth_adfs_db.models import ADFSConfig
+from django_auth_adfs_db.settings import Settings
 
 
 class ADFSConfigTests(TestCase):
