@@ -1,7 +1,7 @@
 Welcome to django-auth-adfs-db's documentation!
 ===============================================
 
-:Version: 0.1.0
+:Version: 0.1.1
 :Source: https://github.com/isprojects/django-auth-adfs-db
 :Keywords: ADFS, Django, database, authentication backend
 :PythonVersion: 3.7
