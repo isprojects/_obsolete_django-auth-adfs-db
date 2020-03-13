@@ -42,7 +42,7 @@ class Settings:
     RETRIES = 3
     TIMEOUT = 5
 
-    SERVER = DynamicSetting()
+    SERVER = DynamicSetting(required=False)
     CLIENT_ID = DynamicSetting()
     TENANT_ID = DynamicSetting(required=False)
     RELYING_PARTY_ID = DynamicSetting()
