@@ -20,6 +20,7 @@ class ADFSConfigAdmin(SingletonModelAdmin):
                     "relying_party_id",
                     "claim_mapping",
                     "username_claim",
+                    "sync_groups",
                 ),
             },
         ),

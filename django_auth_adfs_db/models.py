@@ -75,6 +75,15 @@ class ADFSConfig(SingletonModel):
             "for on-premise or 'upn' is for Azure AD."
         ),
     )
+    sync_groups = models.BooleanField(
+        _("synchronize groups?"),
+        default=True,
+        help_text=_(
+            "Synchronize the local user groups with the ADFS groups. Note that this "
+            "means a user is removed from all groups if there is no group claim. "
+            "Uncheck to manage groups manually."
+        ),
+    )
 
     class Meta:
         verbose_name = _("ADFS Configuration")
@@ -115,12 +124,14 @@ class ADFSConfig(SingletonModel):
         """
         on_premise = bool(self.server)
 
+        groups_claim = None if not self.sync_groups else "group"
+
         settings = {
             "CLIENT_ID": self.client_id,
             "RELYING_PARTY_ID": self.relying_party_id,
             "CA_BUNDLE": True,
             "CLAIM_MAPPING": self.claim_mapping.copy(),
-            "GROUPS_CLAIM": "group",
+            "GROUPS_CLAIM": groups_claim,
         }
 
         if on_premise:
