@@ -10,8 +10,6 @@ from .models import ADFSConfig
 class ADFSConfigAdmin(SingletonModelAdmin):
     fieldsets = (
         (_("Activation"), {"fields": ("enabled",),}),
-        (_("On-premise"), {"fields": ("server",),}),
-        (_("Azure AD"), {"fields": ("tenant_id",),}),
         (
             _("Common settings (on-premise and Azure)"),
             {
@@ -24,4 +22,6 @@ class ADFSConfigAdmin(SingletonModelAdmin):
                 ),
             },
         ),
+        (_("On-premise"), {"fields": ("server",),}),
+        (_("Azure AD"), {"fields": ("tenant_id", "client_secret"),}),
     )

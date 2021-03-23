@@ -32,6 +32,7 @@ class ADFSConfigTests(TestCase):
             },
             "USERNAME_CLAIM": "winaccountname",
             "GROUPS_CLAIM": "group",
+            "MIRROR_GROUPS": True,
         }
 
         self.assertEqual(config.as_settings(), expected)
@@ -43,11 +44,14 @@ class ADFSConfigTests(TestCase):
         config.tenant_id = "1234"
         config.client_id = "59c20eb9-57d9-4ec9-b88a-96b0c49ec238"
         config.relying_party_id = "https://someidentifier.onmicrosoft.com/8595dca3-85f5-4104-98f5-bddec3970a22"
+        config.client_secret = "foo"
         config.save()
 
         expected = {
+            "SERVER": "login.microsoftonline.com",
             "TENANT_ID": "1234",
             "CLIENT_ID": "59c20eb9-57d9-4ec9-b88a-96b0c49ec238",
+            "CLIENT_SECRET": "foo",
             "RELYING_PARTY_ID": "https://someidentifier.onmicrosoft.com/8595dca3-85f5-4104-98f5-bddec3970a22",
             "AUDIENCE": "https://someidentifier.onmicrosoft.com/8595dca3-85f5-4104-98f5-bddec3970a22",
             "CA_BUNDLE": True,
@@ -57,7 +61,8 @@ class ADFSConfigTests(TestCase):
                 "email": "email",
             },
             "USERNAME_CLAIM": "upn",
-            "GROUPS_CLAIM": "group",
+            "GROUPS_CLAIM": "roles",
+            "MIRROR_GROUPS": True,
         }
 
         self.assertEqual(config.as_settings(), expected)

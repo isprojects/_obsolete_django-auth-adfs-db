@@ -40,7 +40,15 @@ class ADFSConfig(SingletonModel):
         max_length=50,
         blank=True,
         help_text=_(
-            "Your tenant ID - this is the 'Directory ID' field in the Azure AD properties."
+            "Your Azure tenant ID, you can find this on the overview page."
+        ),
+    )
+    client_secret = models.CharField(
+        _("client secret"),
+        max_length=200,
+        blank=True,
+        help_text=_(
+            "This is a client secret created for the Azure AD application."
         ),
     )
 
@@ -50,14 +58,14 @@ class ADFSConfig(SingletonModel):
         max_length=50,
         blank=True,
         help_text=_(
-            "This is the Azure 'Application ID' or the on-premise 'Client Identifier' value."
+            "This is the Azure 'Client ID' or the on-premise 'Client Identifier' value."
         ),
     )
     relying_party_id = models.CharField(
         _("relying party ID"),
         max_length=255,
         help_text=_(
-            "For Azure AD, this can be found in the manifest under 'identifierUris', "
+            "For Azure AD, this is the client ID, "
             "for on-premise this is the identifier of the web application."
         ),
     )
@@ -122,9 +130,12 @@ class ADFSConfig(SingletonModel):
         """
         Return the configuration as a dict suitable to pass to django-auth-adfs
         """
+        from django_auth_adfs.config import AZURE_AD_SERVER
+
         on_premise = bool(self.server)
 
-        groups_claim = None if not self.sync_groups else "group"
+        default_groups_claim = "group" if on_premise else "roles"
+        groups_claim = None if not self.sync_groups else default_groups_claim
 
         settings = {
             "CLIENT_ID": self.client_id,
@@ -132,6 +143,7 @@ class ADFSConfig(SingletonModel):
             "CA_BUNDLE": True,
             "CLAIM_MAPPING": self.claim_mapping.copy(),
             "GROUPS_CLAIM": groups_claim,
+            "MIRROR_GROUPS": self.sync_groups,
         }
 
         if on_premise:
@@ -146,6 +158,8 @@ class ADFSConfig(SingletonModel):
         else:  # Azure AD
             settings.update(
                 {
+                    "SERVER": AZURE_AD_SERVER,
+                    "CLIENT_SECRET": self.client_secret,
                     "TENANT_ID": self.tenant_id,
                     "AUDIENCE": self.relying_party_id,
                     "USERNAME_CLAIM": self.username_claim or "upn",
