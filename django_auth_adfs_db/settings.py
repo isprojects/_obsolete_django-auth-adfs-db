@@ -33,8 +33,8 @@ class DynamicSetting:
 def default_failed_response_view(request, error_message=None, status=None):
     return render(
         request,
-        'django_auth_adfs/login_failed.html',
-        {'error_message': error_message},
+        "django_auth_adfs/login_failed.html",
+        {"error_message": error_message},
         status=status,
     )
 

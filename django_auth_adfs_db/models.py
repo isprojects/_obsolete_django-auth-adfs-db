@@ -39,17 +39,13 @@ class ADFSConfig(SingletonModel):
         _("Azure Tenant ID"),
         max_length=50,
         blank=True,
-        help_text=_(
-            "Your Azure tenant ID, you can find this on the overview page."
-        ),
+        help_text=_("Your Azure tenant ID, you can find this on the overview page."),
     )
     client_secret = models.CharField(
         _("client secret"),
         max_length=200,
         blank=True,
-        help_text=_(
-            "This is a client secret created for the Azure AD application."
-        ),
+        help_text=_("This is a client secret created for the Azure AD application."),
     )
 
     # shared settings
