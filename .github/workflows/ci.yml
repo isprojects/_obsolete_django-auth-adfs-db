@@ -20,6 +20,16 @@ jobs:
 
     name: Run the test suite (Python ${{ matrix.python }}, Django ${{ matrix.django }})
 
+    services:
+      postgres:
+        image: docker.io/library/postgres:12
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -37,6 +47,8 @@ jobs:
         env:
           PYTHON_VERSION: ${{ matrix.python }}
           DJANGO: ${{ matrix.django }}
+          PGUSER: postgres
+          PGHOST: localhost
 
   publish:
     name: Publish package to PyPI
