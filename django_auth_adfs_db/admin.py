@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from solo.admin import SingletonModelAdmin
 
@@ -9,9 +9,12 @@ from .models import ADFSConfig
 @admin.register(ADFSConfig)
 class ADFSConfigAdmin(SingletonModelAdmin):
     fieldsets = (
-        (_("Activation"), {"fields": ("enabled",),}),
-        (_("On-premise"), {"fields": ("server",),}),
-        (_("Azure AD"), {"fields": ("tenant_id",),}),
+        (
+            _("Activation"),
+            {
+                "fields": ("enabled",),
+            },
+        ),
         (
             _("Common settings (on-premise and Azure)"),
             {
@@ -22,6 +25,18 @@ class ADFSConfigAdmin(SingletonModelAdmin):
                     "username_claim",
                     "sync_groups",
                 ),
+            },
+        ),
+        (
+            _("On-premise"),
+            {
+                "fields": ("server",),
+            },
+        ),
+        (
+            _("Azure AD"),
+            {
+                "fields": ("tenant_id", "client_secret"),
             },
         ),
     )

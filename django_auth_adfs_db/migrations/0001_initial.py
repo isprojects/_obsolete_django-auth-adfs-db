@@ -86,6 +86,8 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "ADFS Configuration",},
+            options={
+                "verbose_name": "ADFS Configuration",
+            },
         ),
     ]
