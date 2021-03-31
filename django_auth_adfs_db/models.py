@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 from solo.models import SingletonModel
 
@@ -94,7 +94,7 @@ class ADFSConfig(SingletonModel):
 
     def __str__(self):
         type_ = _("On-premise") if self.server else "Azure"
-        return ugettext("{type} ADFS configuration").format(type=type_)
+        return gettext("{type} ADFS configuration").format(type=type_)
 
     def clean(self):
         super().clean()
