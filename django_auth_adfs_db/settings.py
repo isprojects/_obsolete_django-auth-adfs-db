@@ -2,6 +2,7 @@ import logging
 from typing import Any
 
 from django.db.utils import ProgrammingError
+from django.shortcuts import render
 
 from .models import ADFSConfig
 
@@ -29,21 +30,34 @@ class DynamicSetting:
         return _settings.get(self.setting)
 
 
+def default_failed_response_view(request, error_message=None, status=None):
+    return render(
+        request,
+        'django_auth_adfs/login_failed.html',
+        {'error_message': error_message},
+        status=status,
+    )
+
+
 class Settings:
 
     # defaults
     BOOLEAN_CLAIM_MAPPING = {}
     CLIENT_SECRET = None
     CONFIG_RELOAD_INTERVAL = 24  # hours
+    CREATE_NEW_USERS = True
     DISABLE_SSO = False
     GROUP_TO_FLAG_MAPPING = {}
     LOGIN_EXEMPT_URLS = []
     MIRROR_GROUPS = False
     RETRIES = 3
     TIMEOUT = 5
+    JWT_LEEWAY = 0
+    CUSTOM_FAILED_RESPONSE_VIEW = staticmethod(default_failed_response_view)
 
     SERVER = DynamicSetting(required=False)
     CLIENT_ID = DynamicSetting()
+    CLIENT_SECRET = DynamicSetting(required=False)
     TENANT_ID = DynamicSetting(required=False)
     RELYING_PARTY_ID = DynamicSetting()
     AUDIENCE = DynamicSetting()
